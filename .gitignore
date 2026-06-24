@@ -1,0 +1,31 @@
+# Build folders
+bin/
+obj/
+
+# Visual Studio / Rider
+.vs/
+.idea/
+
+# User settings
+*.user
+*.suo
+
+# Logs
+*.log
+
+# Environment files
+.env
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Docker
+postgres_data/
+
+# ASP.NET secrets
+secrets.json
+
+# Node (future frontend)
+node_modules/
+dist/

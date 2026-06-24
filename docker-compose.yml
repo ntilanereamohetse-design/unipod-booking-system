@@ -1,0 +1,51 @@
+services:
+
+  api:
+    build:
+      context: ./backend/UniPod.API
+      dockerfile: Dockerfile
+
+    container_name: unipod-api
+
+    ports:
+      - "5006:8080"
+
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=unipod;Username=postgres;Password=postgres
+
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:17
+
+    container_name: unipod-postgres
+
+    environment:
+      POSTGRES_DB: unipod
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: unipod-pgadmin
+
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@unipod.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+
+    ports:
+      - "5050:80"
+
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
